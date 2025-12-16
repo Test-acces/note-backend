@@ -27,14 +27,14 @@ def create_app() -> FastAPI:
     @app.get("/")
     async def root():
         return {
-            "message": f"Bienvenue sur {settings.app_name}",
+            "message": settings.api_welcome_message.format(app_name=settings.app_name),
             "version": settings.app_version,
-            "docs": "/docs"
+            "docs": settings.api_docs_path
         }
 
     @app.get("/health")
     async def health_check():
-        return {"status": "healthy"}
+        return {"status": settings.api_health_status}
 
     return app
 
